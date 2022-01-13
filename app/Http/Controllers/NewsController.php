@@ -10,11 +10,20 @@ class NewsController extends Controller
     {
         $news = $this->getNews();
 
-        return view('news.index');
+        return view('news.index', [
+            'news' => $news
+        ]);
     }
 
     public function show(int $id)
     {
+        if($id > 10) {
+            abort(404);
+        }
+        $news = $this->getNewsById($id);
 
+        return view('news.show', [
+            'newsItem' => $news
+        ]);
     }
 }

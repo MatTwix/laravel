@@ -12,14 +12,14 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function getNews()
+    public function getNews(): array
     {
         $faker = Factory::create();
 
         $news = [];
 
         for ($i = 0; $i, $i < 10; $i++) {
-            $news = [
+            $news[] = [
                 'id' => $i,
                 'title' => $faker->jobTitle(),
                 'description' => $faker->text(250),
@@ -28,5 +28,17 @@ class Controller extends BaseController
         }
 
         return $news;
+    }
+
+    public function getNewsById(int $id):array
+    {
+        $faker = Factory::create();
+
+        return [
+            'id' => $id,
+            'title' => $faker->jobTitle(),
+            'description' => $faker->text(250),
+            'author' => $faker->userName()
+        ];
     }
 }
