@@ -16,11 +16,10 @@ class Controller extends BaseController
     {
         $faker = Factory::create();
 
-        $news = [];
-
-        for ($i = 0; $i, $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $news[] = [
                 'id' => $i,
+                'category' => floor($i * 2.5 / 10), //каждые 5 новостей номер id категории уавеличивается на 1
                 'title' => $faker->jobTitle(),
                 'description' => $faker->text(250),
                 'author' => $faker->userName()
@@ -30,15 +29,42 @@ class Controller extends BaseController
         return $news;
     }
 
-    public function getNewsById(int $id):array
+    public function getCategories(): array
+    {
+        $faker = Factory::create();
+
+        $categories = [];
+
+        for ($i = 0; $i < 5; $i++) {
+            $categories[] = [
+                'id' => $i,
+                'name' => $faker->dayOfWeek
+            ];
+        }
+
+        return $categories;
+    }
+
+    public function getNewsById(int $id): array
     {
         $faker = Factory::create();
 
         return [
             'id' => $id,
+            'category' => floor($id * 2.5 / 10),
             'title' => $faker->jobTitle(),
             'description' => $faker->text(250),
             'author' => $faker->userName()
+        ];
+    }
+
+    public function getCategoryById(int $id): array
+    {
+        $faker = Factory::create();
+
+        return [
+            'id' => $id,
+            'name' => $faker->dayOfWeek
         ];
     }
 }
