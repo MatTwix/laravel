@@ -19,7 +19,7 @@ class Controller extends BaseController
         for ($i = 0; $i < 20; $i++) {
             $news[] = [
                 'id' => $i,
-                'category' => floor($i * 2.5 / 10), //каждые 5 новостей номер id категории уавеличивается на 1
+                'category' => floor($i * 2.5 / 10), //каждые 4 новости номер id категории уавеличивается на 1
                 'title' => $faker->jobTitle(),
                 'description' => $faker->text(250),
                 'author' => $faker->userName()

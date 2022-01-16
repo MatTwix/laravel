@@ -13,7 +13,7 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        return view('hello');
+        return view('layouts.hello');
     }
 
     /**
@@ -23,7 +23,7 @@ class WelcomeController extends Controller
      */
     public function create()
     {
-        return view('createNews');
+        return view('layouts.createNews');
     }
 
     /**
