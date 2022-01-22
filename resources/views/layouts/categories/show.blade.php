@@ -1,5 +1,9 @@
 @extends('main')
 
+@section('name')
+    <h1>Категория #{{ $categoryItem['id'] }}</h1>
+@endsection
+
 @section('content')
     <strong>{{ $categoryItem['name'] }}</strong>
     <hr>

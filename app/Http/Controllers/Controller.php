@@ -16,10 +16,10 @@ class Controller extends BaseController
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 1; $i <= 20; $i++) {
             $news[] = [
                 'id' => $i,
-                'category' => floor($i * 2.5 / 10), //каждые 4 новости номер id категории уавеличивается на 1
+                'category' => ceil($i * 2.5 / 10), //каждые 4 новости номер id категории уавеличивается на 1
                 'title' => $faker->jobTitle(),
                 'description' => $faker->text(250),
                 'author' => $faker->userName()
@@ -35,7 +35,7 @@ class Controller extends BaseController
 
         $categories = [];
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             $categories[] = [
                 'id' => $i,
                 'name' => $faker->dayOfWeek

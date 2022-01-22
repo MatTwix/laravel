@@ -1,5 +1,5 @@
 @extends('main')
 
-@section('content')
-    <strong>Это приветственная страница сайта</strong>
+@section('name')
+    <h1>Это приветственная страница сайта</h1>
 @endsection

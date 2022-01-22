@@ -1,7 +1,10 @@
 @extends('main')
 
-@section('content')
+@section('name')
     <h1>Список новостей</h1>
+@endsection
+
+@section('content')
     <br>
     @forelse ($news as $newsItem)
         <div>

@@ -8,11 +8,19 @@
     <title></title>
 </head>
 <body>
-<a href="/">Главная страница</a>
-<a href="{{ route('categories.index') }}">Категории</a>
-<a href="{{ route('auth') }}">Регистрация</a>
-<a href="/create">Создать новость</a>
-<br>
+<header>
+    <a href="/">Главная страница</a>
+    <a href="{{ route('categories.index') }}">Категории</a>
+    <a href="{{ route('auth') }}">Регистрация</a>
+    <a href="/create">Создать новость</a>
+    <a href="{{ route('aggregator.index') }}">Агрегатор</a>
+    <hr>
+</header>
+@yield('name')
 @yield('content')
+<footer>
+    <hr>
+    <a href="{{ route('feedback.index') }}">Обратная связь</a>
+</footer>
 </body>
 </html>
