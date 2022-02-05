@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
     public function index()
     {
-        $news = $this->getNews();
+        $model = new News();
+        $news = $model->getNews();
 
         return view('layouts.news.index', [
             'news' => $news
@@ -17,10 +19,9 @@ class NewsController extends Controller
 
     public function show(int $id)
     {
-        if($id > 20) {
-            abort(404);
-        }
-        $news = $this->getNewsById($id);
+        $model = new News();
+
+        $news = $model->getNewsById($id);
 
         return view('layouts.news.show', [
             'newsItem' => $news
