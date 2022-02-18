@@ -4,44 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\News;
+use App\Models\Source;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $model = new Category();
-        $categories = $model->getCategories();
+        $categories = Category::query()->select(
+            Category::$availableFields
+        )->get();
 
         return view('layouts.categories.index', [
             'categories' => $categories
         ]);
     }
 
-    public function show(int $id)
+    public function show(Category $category)
     {
-        $newsModel = new News();
-        $categoryModel = new Category();
-
-        if ($id > 5) {
-            abort(404);
-        }
-
-        $news = $newsModel->getNews();
-
-        $newsResult = [];
-
-        foreach ($news as $newsItem) {
-            if ($newsItem->category_id == $id) {
-                $newsResult[] = $newsItem;
-            }
-        }
-
-        $categoryItem = $categoryModel->getCategoryById($id);
+        $news = News::query()->select(
+            News::$availableFields
+        )->where(
+            'category_id', $category->id
+        )->get();
 
         return view('layouts.categories.show', [
-            'categoryItem' => $categoryItem,
-            'news' => $newsResult
+            'category' => $category,
+            'news' => $news
         ]);
     }
 }

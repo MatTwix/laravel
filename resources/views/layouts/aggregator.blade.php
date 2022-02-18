@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <form method="post" action="{{ route('aggregator.store') }}">
+    <form method="post" action="#">
         @csrf
         <input type="text" placeholder="Имя пользователя" name="name" value="{{ old('name') }}">
         <br>
@@ -15,6 +15,7 @@
         <br>
         <input type="text" placeholder="Желаемая информация" name="info" value="{{ old('info') }}">
         <br>
-        <button type="submit">Отправить запрос</button>
+        <button type="submit">Создать новость</button>
     </form>
+    <br>
 @endsection

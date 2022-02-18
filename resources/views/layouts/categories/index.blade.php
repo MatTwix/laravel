@@ -7,7 +7,7 @@
 @section('content')
     @forelse ($categories as $categoryItem)
         <strong>
-            <a href="{{ route('categories.show', ['id' => $categoryItem->id]) }}">
+            <a href="{{ route('categories.show', ['category' => $categoryItem->id]) }}">
                 {{ $categoryItem->name }}
             </a>
         </strong>

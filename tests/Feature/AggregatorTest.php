@@ -15,7 +15,7 @@ class AggregatorTest extends TestCase
      */
     public function testAggregatorAvailable()
     {
-        $response = $this->get(route('aggregator.index'));
+        $response = $this->get(route('admin.index'));
 
         $response->assertStatus(200);
     }

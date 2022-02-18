@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\News;
 use App\Models\Source;
-use Database\Seeders\NewsSeeder;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class SourceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +15,12 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::query()->select(
-            News::$availableFields
+        $sources = Source::query()->select(
+            Source::$availableFields
         )->get();
 
-        return view('layouts.admin.news.index', [
-            'newsList' => $news
+        return view('layouts.admin.sources.index', [
+            'sources' => $sources
         ]);
     }
 
@@ -34,30 +31,24 @@ class NewsController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $sources = Source::all();
-
-        return view('layouts.admin.news.create', [
-            'categories' => $categories,
-            'sources' => $sources
-        ]);
+        return view('layouts.admin.sources.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $data = $request->only(['category_id', 'title', 'author', 'status', 'description', 'source_id']);
+        $data = $request->only(['name']);
 
-        $created = News::create($data);
+        $created = Source::create($data);
 
-        if ($created) {
-            return redirect()->route('admin.news.index')
-                ->with('success', 'Запись успешно создана');
+        if($created) {
+            return redirect()->route('admin.sources.index')
+                ->with('success', 'Запись успешно добавлена');
         }
 
         return back()->with('error', 'Не удалось добавить запись')
@@ -67,10 +58,10 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param News $news
+     * @param Source $source
      * @return \Illuminate\Http\Response
      */
-    public function show(News $news)
+    public function show(Source $source)
     {
         //
     }
@@ -78,18 +69,13 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param News $news
+     * @param Source $source
      * @return \Illuminate\Http\Response
      */
-    public function edit(News $news)
+    public function edit(Source $source)
     {
-        $categories = Category::all();
-        $sources = Source::all();
-
-        return view('layouts.admin.news.edit', [
-            'news' => $news,
-            'categories' => $categories,
-            'sources' => $sources
+        return view('layouts.admin.sources.edit', [
+            'source' => $source
         ]);
     }
 
@@ -97,17 +83,17 @@ class NewsController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param News $news
+     * @param Source $source
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(Request $request, Source $source)
     {
-        $data = $request->only(['category_id', 'title', 'author', 'status', 'description', 'source_id']);
+        $data = $request->only(['name']);
 
-        $updated = $news->fill($data)->save();
+        $updated = $source->fill($data)->save();
 
-        if ($updated) {
-            return redirect()->route('admin.news.index')
+        if($updated) {
+            return redirect()->route('admin.sources.index')
                 ->with('success', 'Запись успешно изменена');
         }
 
@@ -118,15 +104,15 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param News $news
+     * @param Source $source
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(Source $source)
     {
-        $deleted = $news->delete();
+        $deleted = $source->delete();
 
         if ($deleted) {
-            return redirect()->route('admin.news.index')
+            return redirect()->route('admin.sources.index')
                 ->with('success', 'Запись успешно удалена');
         }
 

@@ -10,15 +10,13 @@ class Source extends Model
 {
     use HasFactory;
 
+    public static $availableFields = [
+        'id', 'name'
+    ];
+
     protected $table = 'sources';
 
-    public function getSources(): array
-    {
-        return DB::select("SELECT id, name FROM {$this->table}");
-    }
-
-    public function getSourcesById(int $id): array
-    {
-        return DB::select("SELECT id, name FROM {$this->table} WHERE id= :id", ['id' => $id]);
-    }
+    protected $fillable = [
+        'name'
+    ];
 }

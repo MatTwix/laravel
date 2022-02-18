@@ -23,7 +23,7 @@ class WelcomeController extends Controller
      */
     public function create()
     {
-        return view('layouts.createNews');
+        //
     }
 
     /**

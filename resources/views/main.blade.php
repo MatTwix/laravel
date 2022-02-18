@@ -10,10 +10,12 @@
 <body>
 <header>
     <a href="/">Главная страница</a>
+    <a href="{{ route('news.index') }}">Все новости</a>
     <a href="{{ route('categories.index') }}">Категории</a>
-    <a href="{{ route('auth') }}">Регистрация</a>
-    <a href="/create">Создать новость</a>
-    <a href="{{ route('aggregator.index') }}">Агрегатор</a>
+    <a href="{{ route('sources.index') }}">Источники</a>
+    <a href="{{ route('aggregator') }}">Агрегатор</a>
+    <a href="{{ route('admin.index') }}">Админка</a>
+    <a href="{{ route('auth') }}" style="float: right">Регистрация</a>
     <hr>
 </header>
 @yield('name')

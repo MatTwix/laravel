@@ -10,15 +10,29 @@ class News extends Model
 {
     use HasFactory;
 
+    public static $availableFields = [
+        'id', 'category_id', 'title', 'author', 'status', 'description', 'source_id'
+    ];
+
+    public static $joinAvailableFields = [
+        'news.id',
+        'news.category_id',
+        'news.title',
+        'news.author',
+        'news.status',
+        'news.description',
+        'sources.name AS source_name',
+        'categories.name AS category_name'
+    ];
+
     protected $table = 'news';
 
-    public function getNews(): array
-    {
-        return DB::select("SELECT id, category_id, title, author, status, description FROM {$this->table}");
-    }
-
-    public function getNewsById(int $id): array
-    {
-        return DB::select("SELECT id, title, author, status, description FROM {$this->table} WHERE id= :id", ['id' => $id]);
-    }
+    protected $fillable = [
+        'title',
+        'author',
+        'status',
+        'description',
+        'category_id',
+        'source_id'
+    ];
 }

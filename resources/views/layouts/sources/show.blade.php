@@ -1,11 +1,11 @@
 @extends('main')
 
 @section('name')
-    <h1>Категория #{{ $category->id }}</h1>
+    <h1>Источник #{{ $source->id }}</h1>
 @endsection
 
 @section('content')
-    <strong>{{ $category->name }}</strong>
+    <strong>{{ $source->name }}</strong>
     @forelse ($news as $newsItem)
         <div>
             <hr>
@@ -14,6 +14,6 @@
             <em> Aвтор: {{ $newsItem->author }} </em>
         </div>
     @empty
-        <h1>Новости данной категории отсутствуют</h1>
+        <h1>Новости данного источника отсутствуют</h1>
     @endforelse
 @endsection
