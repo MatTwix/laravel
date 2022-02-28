@@ -11,6 +11,7 @@
         <div>
             <label for="name">Название источника</label>
             <input type="text" id="name" name="name" value="{{ old('name') }}">
+            @error('name') <strong style="color: red">{{ $message }}</strong> @enderror
         </div>
         <button type="submit">Сохранить</button>
     </form>

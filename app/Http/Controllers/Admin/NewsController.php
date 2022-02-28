@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\News\CreateRequest;
+use App\Http\Requests\News\EditRequest;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\Source;
-use Database\Seeders\NewsSeeder;
-use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
@@ -46,14 +46,12 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param CreateRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        $data = $request->only(['category_id', 'title', 'author', 'status', 'description', 'source_id']);
-
-        $created = News::create($data);
+        $created = News::create($request->validated());
 
         if ($created) {
             return redirect()->route('admin.news.index')
@@ -96,15 +94,13 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param EditRequest $request
      * @param News $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(EditRequest $request, News $news)
     {
-        $data = $request->only(['category_id', 'title', 'author', 'status', 'description', 'source_id']);
-
-        $updated = $news->fill($data)->save();
+        $updated = $news->fill($request->validated())->save();
 
         if ($updated) {
             return redirect()->route('admin.news.index')
